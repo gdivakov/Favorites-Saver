@@ -25,7 +25,6 @@ const favoritesReducer = (state = initialState, { type, payload = {}}) => {
     case CONSTS.FETCH_SUCCESS:
       // Delete prev favs
       const likedIds = state.likedIds.slice().filter(id => id.indexOf(payload.provider) === -1);
-      console.log(likedIds);
       return {
         ...state,
         likedIds,

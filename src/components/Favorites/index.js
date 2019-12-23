@@ -7,7 +7,7 @@ import Table, {MODES} from '../Table';
 const Favorites = ({classes, entitiesActions, omdbData, wikiData}) => {
   return (
     <div className={classes.container}>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div className={classes.header}>
         <Typography variant="h5">
           You can easily manage your favorites!
         </Typography>
@@ -34,7 +34,11 @@ const styles = {
   },
   table: {
     marginTop: 60,
-  }
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
 }
 
 export default withStyles(styles)(Favorites);

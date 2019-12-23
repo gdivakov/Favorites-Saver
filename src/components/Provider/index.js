@@ -13,7 +13,7 @@ const Provider = ({classes, apiActions, entitiesActions, omdbData, wikiData}) =>
   return (
     <>
       <Paper className={classes.container}>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <div className={classes.header}>
           <Typography variant="h5">
             Please select the provider
           </Typography>
@@ -47,6 +47,10 @@ const styles = {
     padding: 40,
     margin: 20,
     minHeight: 800,
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between'
   },
 }
 

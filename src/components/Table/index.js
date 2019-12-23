@@ -9,7 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Sort as SortIcon} from '@material-ui/icons';
-import {FavoriteBorder as FavoriteBorderIcon, Favorite as FavoriteIcon} from '@material-ui/icons'
+import {FavoriteBorder as FavoriteBorderIcon, Favorite as FavoriteIcon} from '@material-ui/icons';
+import classNames from 'classnames';
 
 const INNER_FIELDS = ['_innerID', 'isFavorite'];
 const SORTED_KEY = 'title'
@@ -75,11 +76,15 @@ const DataTable = ({provider, entitiesActions, mode = MODES.PROVIDER, className,
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <StyledTableCell></StyledTableCell>
-            {colls.filter(col => INNER_FIELDS.indexOf(col) === -1).map((name, idx) => (
-              <StyledTableCell key={name} align={idx ? "right" : "left"}>
-                <div style={{display: 'flex'}}>
-                  {name.toLowerCase() === SORTED_KEY && <SortIcon style={{cursor: 'pointer'}} onClick={handleSortingClick}/>}
+            <StyledTableCell />
+            {colls.filter(col => INNER_FIELDS.indexOf(col) === -1).map((name, idx, arr) => (
+              <StyledTableCell key={name}>
+                <div
+                  className={classNames(classes.cell, {
+                    [classes.cellAlignRight]: idx === arr.length-1,
+                  })}
+                >
+                  {name.toLowerCase() === SORTED_KEY && <SortIcon className={classes.sortIcon} onClick={handleSortingClick}/>}
                   {name}
                 </div>
               </StyledTableCell>
@@ -98,9 +103,9 @@ const DataTable = ({provider, entitiesActions, mode = MODES.PROVIDER, className,
                 }
               </StyledTableCell>
 
-              {colls.filter(col => INNER_FIELDS.indexOf(col) === -1).map((colName, idx) => (
-                <StyledTableCell align={idx ? "right" : "left"} key={colName}>
-                  <div>{row[colName] || '-'}</div>
+              {colls.filter(col => INNER_FIELDS.indexOf(col) === -1).map((colName, idx, arr) => (
+                <StyledTableCell align={idx === arr.length-1? "right" : "left"} key={colName}>
+                  {row[colName] || '-'}
                 </StyledTableCell>
               ))}
             </StyledTableRow>
@@ -132,6 +137,17 @@ const useStyles = makeStyles({
   },
   icon: {
     cursor: 'pointer',
+  },
+  sortIcon: {
+    cursor: 'pointer',
+    marginRight: 5,
+  },
+  cell: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+  },
+  cellAlignRight: {
+    justifyContent: 'flex-end',
   },
 });
 
