@@ -79,7 +79,7 @@ const DataTable = ({provider, entitiesActions, mode = MODES.PROVIDER, className,
             {colls.filter(col => INNER_FIELDS.indexOf(col) === -1).map((name, idx) => (
               <StyledTableCell key={name} align={idx ? "right" : "left"}>
                 <div style={{display: 'flex'}}>
-                  {idx === 0 && <SortIcon style={{cursor: 'pointer'}} onClick={handleSortingClick}/>}
+                  {name.toLowerCase() === SORTED_KEY && <SortIcon style={{cursor: 'pointer'}} onClick={handleSortingClick}/>}
                   {name}
                 </div>
               </StyledTableCell>
